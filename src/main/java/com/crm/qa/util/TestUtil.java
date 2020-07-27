@@ -22,8 +22,8 @@ import com.crm.qa.base.TestBase;
 
 public class TestUtil extends TestBase {
 
-	public static long PAGE_LOAD_TIMEOUT = 20;
-	public static long IMPLICIT_WAIT = 20;
+	public static long PAGE_LOAD_TIMEOUT = 80;
+	public static long IMPLICIT_WAIT = 60;
 
 //	public static String TESTDATA_SHEET_PATH = "/Users/naveenkhunteta/Documents/workspace"
 //			+ "/FreeCRMTest/src/main/java/com/crm/qa/testdata/FreeCrmTestData.xlsx";
@@ -50,7 +50,14 @@ public class TestUtil extends TestBase {
 		TestUtil.wait(5);
 	}
 	
-	public static void waitForElementPresent(WebElement we)
+	public static void waitTillProcessBarPresent(WebElement we)
+	{
+		WebDriverWait wait = new WebDriverWait(driver,30);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='lds-spinner']")));
+	}
+	
+	
+	public void waitForElementPresent(WebElement we)
 	{
 		WebDriverWait wait = new WebDriverWait(driver,30);
 		wait.until(ExpectedConditions.elementToBeClickable(we));

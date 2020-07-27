@@ -22,6 +22,7 @@ public class TestBase {
 	public static Properties prop;
 	public  static EventFiringWebDriver e_driver;
 	public static WebEventListener eventListener;
+	public static String USER_NAME,PASSWORD;
 
 	public TestBase(){
 		try {
@@ -37,10 +38,13 @@ public class TestBase {
 	}
 
 
-	public static void initialization(String classname){
+	public static void initialization(){
 		String browserName = prop.getProperty("browser");
-
+		USER_NAME =prop.getProperty("username");
+		PASSWORD = prop.getProperty("password");
 		if(browserName.equals("chrome")){
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--disable-notifications");
 			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/drivers/chromedriver");	
 			driver = new ChromeDriver(); 
 			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
@@ -58,11 +62,7 @@ public class TestBase {
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().pageLoadTimeout(TestUtil.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
-		driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
-		if(classname.contains("NdtvWeatherVerification"))
-			driver.get(prop.getProperty("urlNdtvWeather"));
-		else
-			driver.get(prop.getProperty("urlNdtv"));
+		driver.get(prop.getProperty("url"));
 		driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
 	}
 
