@@ -14,7 +14,6 @@ Extent Reports
 
 ### Steps to clone execute the tests
 ```
-git clone https://github.com/lavgupta007/DemoRepro.git
-cd DemoRepro
+git clone https://github.com/lavgupta007/QuantInstiAssigment.git
 mvn clean test
 ```
